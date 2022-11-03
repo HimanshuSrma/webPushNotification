@@ -1,3 +1,5 @@
+navigator.serviceWorker.getRegistrations().then((r)=>{r[0].unregister()})
+
 importScripts("https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js");
 importScripts(
     "https://www.gstatic.com/firebasejs/7.16.1/firebase-messaging.js",
