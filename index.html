@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Push Demo</title>
+        <style>
+            div {
+                margin-bottom: 15px;
+            }
+        </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+    <script src="script.js"></script>
+    <!-- <script src="firebase-messaging-sw.js"></script> -->
+    <script>
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/firebase-messaging-sw.js');
+          });
+        }
+      </script>
+</head>
+<body>
+
+    <div id="token"></div>
+    <div id="msg"></div>
+    <div id="notis"></div>
+    <div id="err"></div>
+    <script>
+       MsgElem = document.getElementById("msg")
+       TokenElem = document.getElementById("token")
+       NotisElem = document.getElementById("notis")
+       ErrElem = document.getElementById("err")
+    </script>
+
+    <script>
+        const messaging = firebase.messaging();
+        messaging
+        .requestPermission()
+        .then(function () {
+            MsgElem.innerHTML = "Notification permission granted."
+            console.log("Notification permission granted.");
+
+            // get the token in the form of promise
+            return messaging.getToken()
+        })
+        .then(function(token) {
+            // print the token on the HTML page
+            TokenElem.innerHTML = "Device token is : <br>" + token
+        })
+        .catch(function (err) {
+            ErrElem.innerHTML = ErrElem.innerHTML + "; " + err
+            console.log("Unable to get permission to notify.", err);
+        });
+    </script>
+
+</body>
+</html>
