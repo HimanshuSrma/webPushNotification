@@ -19,7 +19,9 @@
     <script>
         if ('serviceWorker' in navigator) {
           window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/firebase-messaging-sw.js');
+            // navigator.serviceWorker.register('/firebase-messaging-sw.js');https://himanshusrma.github.io/webPushNotification/firebase-messaging-sw.js
+            navigator.serviceWorker.register('firebase-messaging-sw.js');
+            // navigator.serviceWorker.register('https://himanshusrma.github.io/webPushNotification/firebase-messaging-sw.js');
           });
         }
       </script>
